@@ -28,73 +28,71 @@ const GeneralForm = ({ form, requireHandle = true }: Props) => {
     <div>
       <div className="grid grid-cols-2 gap-x-large mb-small">
         <InputField
-          label="Title"
-          placeholder="Winter Jacket"
+          label="Tên sản phẩm"
+          placeholder="Nike Air Max Excee"
           required
           {...register(path("title"), {
-            required: "Title is required",
+            required: "Tên sản phẩm bắt buộc",
             minLength: {
               value: 1,
-              message: "Title must be at least 1 character",
+              message: "Tên sản phẩm tối thiểu 1 kí tự",
             },
             pattern: FormValidator.whiteSpaceRule("Title"),
           })}
           errors={errors}
         />
-        <InputField
+        {/* <InputField
           label="Subtitle"
           placeholder="Warm and cozy..."
           {...register(path("subtitle"), {
             pattern: FormValidator.whiteSpaceRule("Subtitle"),
           })}
           errors={errors}
-        />
+        /> */}
       </div>
       <p className="inter-base-regular text-grey-50 mb-large">
-        Give your product a short and clear title.
+        Tên sản phẩm nên chính xác và rõ ràng
         <br />
-        50-60 characters is the recommended length for search engines.
       </p>
-      <div className="grid grid-cols-2 gap-x-large mb-large">
-        <InputField
-          label="Handle"
-          tooltipContent={
-            !requireHandle
-              ? "The handle is the part of the URL that identifies the product. If not specified, it will be generated from the title."
-              : undefined
-          }
-          placeholder="winter-jacket"
-          required={requireHandle}
-          {...register(path("handle"), {
-            required: requireHandle ? "Handle is required" : undefined,
-            minLength: FormValidator.minOneCharRule("Handle"),
-            pattern: FormValidator.whiteSpaceRule("Handle"),
-          })}
-          prefix="/"
-          errors={errors}
-        />
-        <InputField
-          label="Material"
-          placeholder="100% cotton"
-          {...register(path("material"), {
-            minLength: FormValidator.minOneCharRule("Material"),
-            pattern: FormValidator.whiteSpaceRule("Material"),
-          })}
-          errors={errors}
-        />
-      </div>
+        {/* <div className="grid grid-cols-2 gap-x-large mb-large">
+          <InputField
+            label="Handle"
+            tooltipContent={
+              !requireHandle
+                ? "The handle is the part of the URL that identifies the product. If not specified, it will be generated from the title."
+                : undefined
+            }
+            placeholder="winter-jacket"
+            required={requireHandle}
+            {...register(path("handle"), {
+              required: requireHandle ? "Handle is required" : undefined,
+              minLength: FormValidator.minOneCharRule("Handle"),
+              pattern: FormValidator.whiteSpaceRule("Handle"),
+            })}
+            prefix="/"
+            errors={errors}
+          />
+          <InputField
+            label="Material"
+            placeholder="100% cotton"
+            {...register(path("material"), {
+              minLength: FormValidator.minOneCharRule("Material"),
+              pattern: FormValidator.whiteSpaceRule("Material"),
+            })}
+            errors={errors}
+          />
+        </div> */}
       <TextArea
-        label="Description"
-        placeholder="A warm and cozy jacket..."
+        label="Mô tả tình trạng"
+        placeholder="Giày mới mua 1 tháng, còn mới ..."
         rows={3}
         className="mb-small"
         {...register(path("description"))}
         errors={errors}
       />
       <p className="inter-base-regular text-grey-50">
-        Give your product a short and clear description.
+        Đảm bảo mô tả trung thực tình trạng giày.
         <br />
-        120-160 characters is the recommended length for search engines.
       </p>
     </div>
   )

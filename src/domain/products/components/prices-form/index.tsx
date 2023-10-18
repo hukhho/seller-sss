@@ -43,7 +43,7 @@ type Props = {
  */
 const PricesForm = ({ form }: Props) => {
   const { store } = useAdminStore()
-  const { regions } = useAdminRegions()
+  const regions = useAdminRegions().regions?.filter((reg) => reg.name === 'VN');; // Assuming useAdminRegions returns an array of regions
 
   const { control, path } = form
 
@@ -56,9 +56,13 @@ const PricesForm = ({ form }: Props) => {
     if (!regions || !store || !fields) {
       return
     }
+    // const filteredRegions = regions.filter((reg) => reg.name === 'VN');
 
     regions.forEach((reg) => {
       if (!fields.some((field) => field.region_id === reg.id)) {
+        console.log("regions: ", regions)
+        console.log("reg: ", reg)
+
         append({
           id: null,
           region_id: reg.id,
@@ -89,8 +93,9 @@ const PricesForm = ({ form }: Props) => {
     if (!regions || !fields || !store) {
       return
     }
+    const filteredRegions = regions.filter((reg) => reg.name === 'VN');
 
-    regions.forEach((reg) => {
+    filteredRegions.forEach((reg) => {
       const regionPrice = fields.findIndex(
         (field) => !!field && field.region_id === reg.id
       )
@@ -129,10 +134,12 @@ const PricesForm = ({ form }: Props) => {
   const priceObj = useMemo(() => {
     const obj: Record<string, NestedPriceObject> = {}
 
-    const currencyPrices = fields.filter((field) => field.region_id === null)
+    const currencyPrices = fields.filter((field) => field.currency_code === "vnd")
     const regionPrices = fields.filter((field) => field.region_id !== null)
-
-    currencyPrices.forEach((price) => {
+    currencyPrices
+    currencyPrices.forEach(
+      
+      (price) => {
       obj[price.currency_code!] = {
         currencyPrice: {
           ...price,
@@ -157,6 +164,7 @@ const PricesForm = ({ form }: Props) => {
     <div>
       <div>
         {Object.values(priceObj).map((po) => {
+          console.log("priceObj: ", po)
           return (
             <NestedPrice
               form={form}

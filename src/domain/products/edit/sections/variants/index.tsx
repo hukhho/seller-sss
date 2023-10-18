@@ -77,12 +77,12 @@ const VariantsSection = ({ product }: Props) => {
   return (
     <OptionsProvider product={product}>
       <Section title="Variants" actions={actions}>
-        <ProductOptions />
+        {/* <ProductOptions /> */}
         <div className="mt-xlarge">
           <h2 className="inter-large-semibold mb-base">
-            Product variants{" "}
+            {/* Product variants{" "} */}
             <span className="inter-large-regular text-grey-50">
-              ({product.variants.length})
+              {/* ({product.variants.length}) */}
             </span>
           </h2>
           <VariantsTable

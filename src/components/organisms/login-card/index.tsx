@@ -35,13 +35,13 @@ const LoginCard: React.FC<LoginCardProps> = ({ toResetPassword }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col items-center">
         <span className="inter-2xlarge-semibold mt-4 text-grey-90">
-          Welcome back!
+          Trang bán giày
         </span>
         <span className="inter-base-regular text-grey-50 mt-2">
-          It's great to see you 👋🏼
+           👋🏼
         </span>
         <span className="inter-base-regular text-grey-50 mb-xlarge">
-          Log in to your account below
+          Đăng nhập vào tài khoản
         </span>
         <SigninInput
           placeholder="Email..."
@@ -66,13 +66,13 @@ const LoginCard: React.FC<LoginCardProps> = ({ toResetPassword }) => {
           type="submit"
           loading={login.isLoading}
         >
-          Continue
+          Đăng nhập
         </Button>
         <span
           className="inter-small-regular text-grey-50 mt-8 cursor-pointer"
           onClick={toResetPassword}
         >
-          Reset password
+          Quên mật khẩu?
         </span>
       </div>
     </form>

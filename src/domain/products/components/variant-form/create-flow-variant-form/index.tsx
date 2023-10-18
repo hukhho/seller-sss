@@ -58,16 +58,16 @@ type Props = {
 const CreateFlowVariantForm = ({ form, options, onCreateOption }: Props) => {
   return (
     <Accordion type="multiple" defaultValue={["general"]}>
-      <Accordion.Item title="General" value="general" required>
+      <Accordion.Item title="" value="general">
         <div>
-          <VariantGeneralForm form={nestedForm(form, "general")} />
+          {/* <VariantGeneralForm form={nestedForm(form, "general")} /> */}
           <div className="mt-xlarge">
             <div className="flex items-center gap-x-2xsmall mb-base">
-              <h3 className="inter-base-semibold">Options</h3>
+              {/* <h3 className="inter-base-semibold">Options</h3>
               <IconTooltip
                 type="info"
                 content="Options are used to define the color, size, etc. of the variant."
-              />
+              /> */}
             </div>
             <VariantSelectOptionsForm
               form={nestedForm(form, "options")}
@@ -81,10 +81,10 @@ const CreateFlowVariantForm = ({ form, options, onCreateOption }: Props) => {
       <Accordion.Item title="Pricing" value="pricing">
         <VariantPricesForm form={nestedForm(form, "prices")} />
       </Accordion.Item>
-      <Accordion.Item title="Stock & Inventory" value="stock">
+      <Accordion.Item className="hidden" title="Stock & Inventory" value="stock">
         <VariantStockForm form={nestedForm(form, "stock")} />
       </Accordion.Item>
-      <Accordion.Item title="Shipping" value="shipping">
+      <Accordion.Item className="hidden" title="Shipping" value="shipping">
         <p className="inter-base-regular text-grey-50">
           Shipping information can be required depending on your shipping
           provider, and whether or not you are shipping internationally.

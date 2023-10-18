@@ -1,5 +1,12 @@
 import clsx from "clsx"
-import React, { useCallback, useEffect, useMemo } from "react"
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useLayoutEffect,
+  useRef,
+} from "react"
 import { Controller, useFieldArray, useForm, useWatch } from "react-hook-form"
 import { v4 as uuidv4 } from "uuid"
 import Button from "../../../../components/fundamentals/button"
@@ -81,10 +88,58 @@ const AddVariantsForm = ({
     name: path("entries"),
   })
 
+  // Dummy data for testing purposes
+  const fakeProductOptions: ProductOptionType[] = [
+    {
+      id: "1",
+      title: "Color",
+      values: ["Red", "Green", "Blue", "Yellow", "Purple"],
+    },
+    {
+      id: "2",
+      title: "Size",
+      values: ["38", "39", "40", "41", "42"],
+    },
+  ]
   const debouncedOptions = useDebounce(watchedOptions, 500)
+  const debounceDoneRef = useRef(false)
+  const initialized = useRef(false)
+
+  const [initialOptionAdded, setInitialOptionAdded] = useState(false)
+  const appendOptionMemoized = useMemo(() => {
+    return (option) => {
+      appendOption({
+        id: uuidv4(),
+        title: "Color",
+        values: [],
+      })
+    }
+  }, [debouncedOptions])
+  useLayoutEffect(() => {
+    if (!initialized.current) {
+      initialized.current = true
+
+      appendOption([
+        {
+          id: uuidv4(),
+          title: "Màu",
+          values: ["Xanh", "Đỏ", "Tím", "Vàng", "Trắng"],
+        },
+        {
+          id: uuidv4(),
+          title: "Size",
+          values: ["35", "36", "37", "38", "39"],
+        },
+      ])
+
+      setInitialOptionAdded(true)
+    }
+  }, [initialOptionAdded])
 
   useEffect(() => {
     if (debouncedOptions?.length) {
+      console.log("debouncedOptions: ", debouncedOptions)
+
       const optionMap = debouncedOptions.reduce((acc, option) => {
         acc[option.id] = option
         return acc
@@ -127,6 +182,8 @@ const AddVariantsForm = ({
 
           missingIds.forEach((id) => {
             const optionData = optionMap[id]
+            console.log("missingIds:::optionData: ", optionData)
+
             validOptions.push({
               option_id: id,
               title: optionData.title,
@@ -149,7 +206,7 @@ const AddVariantsForm = ({
         })
       }
     }
-  }, [debouncedOptions])
+  }, [debouncedOptions, debounceDoneRef])
 
   const onDeleteProductOption = (index: number) => {
     const option = watchedOptions[index]
@@ -196,11 +253,23 @@ const AddVariantsForm = ({
   const appendNewOption = () => {
     appendOption({
       id: uuidv4(),
-      title: "",
+      title: "Concac",
       values: [],
     })
   }
-
+  const appendNewOptionV2 = () => {
+    // Check if an option with the same title already exists
+    const isOptionExists = options.some((option) => option.title === "Concac")
+    if (!isOptionExists) {
+      appendOption({
+        id: uuidv4(),
+        title: "Concac",
+        values: [],
+      })
+    } else {
+      console.log("Option with the same title already exists")
+    }
+  }
   const newVariantForm = useForm<CreateFlowVariantFormType>()
   const { reset, handleSubmit: submitVariant } = newVariantForm
   const { state, toggle } = useToggleState()
@@ -243,31 +312,38 @@ const AddVariantsForm = ({
   }, [])
 
   const onAddNewProductOptionValue = (optionId: string, value: string) => {
-    const option = watchedOptions?.find((wo) => wo.id === optionId)
+    // Find the index of the option with the matching ID
+    const optionIndex = watchedOptions.findIndex(
+      (option) => option.id === optionId
+    )
 
-    if (!option) {
-      return
+    if (optionIndex !== -1) {
+      // Make a copy of the options array and update the selected option's values
+      const updatedOptions = [...watchedOptions]
+      updatedOptions[optionIndex] = {
+        ...updatedOptions[optionIndex],
+        values: [...updatedOptions[optionIndex].values, value],
+      }
+
+      // Update the options in the form
+      updateOption(optionIndex, updatedOptions[optionIndex])
     }
-
-    const index = watchedOptions?.findIndex((wo) => wo.id === optionId)
-
-    updateOption(index, { ...option, values: [...option.values, value] })
   }
 
   return (
     <>
       <div>
-        <div className="flex items-center gap-x-2xsmall">
+        {/* <div className="flex items-center gap-x-2xsmall">
           <h3 className="inter-base-semibold">Product options</h3>
           <IconTooltip
             type="info"
             content="Options are used to define the color, size, etc. of the product."
           />
-        </div>
+        </div> */}
         <div>
           {options.length > 0 && (
-            <div className="mt-small">
-              <div className="grid grid-cols-[230px_1fr_40px] gap-x-xsmall inter-small-semibold text-grey-50 mb-small">
+            <div className="mt-small bg-blue-500 hidden">
+              <div className="inter-small-semibold mb-small grid grid-cols-[230px_1fr_40px] gap-x-xsmall text-grey-50">
                 <span>Option title</span>
                 <span>Variations (comma separated)</span>
               </div>
@@ -286,13 +362,13 @@ const AddVariantsForm = ({
                         control={control}
                         name={path(`options.${index}.values`)}
                         render={({ field: { value, onChange } }) => {
+                          console.log("Controller:::field:", field)
                           return (
                             <TagInput
                               onValidate={(newVal) => {
                                 if (value.includes(newVal)) {
                                   return null
                                 }
-
                                 return newVal
                               }}
                               invalidMessage="already exists"
@@ -319,19 +395,20 @@ const AddVariantsForm = ({
               </div>
             </div>
           )}
-          <Button
+          {/* <Button
             variant="secondary"
             size="small"
-            className="h-10 w-full mt-base"
+            className="mt-base h-10 w-full"
             type="button"
             onClick={appendNewOption}
           >
             <PlusIcon size={20} />
             <span>Add an option</span>
-          </Button>
+          </Button> */}
+       
           <div className="mt-xlarge">
             <div className="flex items-center gap-x-2xsmall">
-              <h3
+              {/* <h3
                 className={clsx("inter-base-semibold", {
                   "opacity-50": !options.length,
                 })}
@@ -340,19 +417,19 @@ const AddVariantsForm = ({
                 <span className="inter-base-regular text-grey-50">
                   ({variants?.length || 0})
                 </span>
-              </h3>
-              {!enableVariants && (
+              </h3> */}
+              {/* {!enableVariants && (
                 <IconTooltip
                   type="info"
                   content="You must add at least one product option before you can begin adding product variants."
                 />
-              )}
+              )} */}
             </div>
             {variants?.length > 0 && (
               <div className="mt-small">
-                <div className="grid grid-cols-[1fr_90px_100px_48px] inter-small-semibold text-grey-50 pr-base">
+                <div className="inter-small-semibold grid grid-cols-[1fr_90px_100px_48px] pr-base text-grey-50">
                   <p>Variant</p>
-                  <div className="flex justify-end mr-xlarge">
+                  <div className="mr-xlarge flex justify-end">
                     <p>Inventory</p>
                   </div>
                 </div>
@@ -380,14 +457,15 @@ const AddVariantsForm = ({
             <Button
               variant="secondary"
               size="small"
-              className="h-10 w-full mt-base"
+              className="mt-base h-10 w-full"
               type="button"
-              disabled={!enableVariants}
+              disabled={variants?.length > 0}
               onClick={onToggleForm}
             >
               <PlusIcon size={20} />
-              <span>Add a variant</span>
+              <span>Thêm thuộc tính</span>
             </Button>
+            
           </div>
         </div>
       </div>
@@ -395,7 +473,7 @@ const AddVariantsForm = ({
       <Modal open={state} handleClose={onToggleForm}>
         <Modal.Body>
           <Modal.Header handleClose={onToggleForm}>
-            <h1 className="inter-xlarge-semibold">Create Variant</h1>
+            <h1 className="inter-xlarge-semibold">Tạo mới thuộc tính</h1>
           </Modal.Header>
           <Modal.Content>
             <CreateFlowVariantForm
@@ -405,7 +483,7 @@ const AddVariantsForm = ({
             />
           </Modal.Content>
           <Modal.Footer>
-            <div className="flex items-center gap-x-xsmall justify-end w-full">
+            <div className="flex w-full items-center justify-end gap-x-xsmall">
               <Button
                 variant="secondary"
                 size="small"
@@ -437,10 +515,17 @@ const createEmptyVariant = (
     _internal_id: uuidv4(),
     general: {
       title: null,
-      material: null,
+      material: '',
     },
     prices: {
-      prices: [],
+      prices: [
+        // {
+        //   id: uuidv4(),
+        //   amount: 5000,
+        //   currency_code: 'vnd',
+        //   region_id: null,
+        // }
+      ],
     },
     stock: {
       manage_inventory: true,
@@ -449,7 +534,7 @@ const createEmptyVariant = (
       barcode: null,
       ean: null,
       upc: null,
-      inventory_quantity: null,
+      inventory_quantity: 1,
     },
     dimensions: {
       weight: null,

@@ -1,5 +1,6 @@
 import { AdminPostProductsReq } from "@medusajs/medusa"
 import { useAdminCreateProduct } from "medusa-react"
+import { v4 as uuidv4 } from "uuid"
 import { useEffect } from "react"
 import { useForm, useWatch } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
@@ -172,7 +173,7 @@ const NewProduct = ({ onClose }: Props) => {
                 disabled={!isDirty}
                 onClick={onSubmit(false)}
               >
-                Save as draft
+                Lưu nháp
               </Button>
               <Button
                 size="small"
@@ -181,7 +182,7 @@ const NewProduct = ({ onClose }: Props) => {
                 disabled={!isDirty}
                 onClick={onSubmit(true)}
               >
-                Publish product
+                Đăng sản phẩm
               </Button>
             </div>
           </div>
@@ -191,28 +192,31 @@ const NewProduct = ({ onClose }: Props) => {
             <Accordion defaultValue={["general"]} type="multiple">
               <Accordion.Item
                 value={"general"}
-                title="General information"
+                title="Thông tin cơ bản"
                 required
               >
                 <p className="inter-base-regular text-grey-50">
-                  To start selling, all you need is a name and a price.
+                  Để bắt đầu bán hàng, bạn chỉ cần có tên sản phẩm và giá.
                 </p>
                 <div className="flex flex-col mt-xlarge gap-y-xlarge">
+                  <OrganizeForm form={nestedForm(form, "organize")} />
+
                   <GeneralForm
                     form={nestedForm(form, "general")}
                     requireHandle={false}
                   />
-                  <DiscountableForm form={nestedForm(form, "discounted")} />
+                 
+                  {/* <DiscountableForm form={nestedForm(form, "discounted")} /> */}
                 </div>
               </Accordion.Item>
-              <Accordion.Item title="Organize" value="organize">
+              {/* <Accordion.Item title="Thương hiệu" value="organize">
                 <p className="inter-base-regular text-grey-50">
                   To start selling, all you need is a name and a price.
                 </p>
                 <div className="flex flex-col mt-xlarge gap-y-xlarge pb-xsmall">
                   <div>
                     <h3 className="inter-base-semibold mb-base">
-                      Organize Product
+                      Thương hiệu
                     </h3>
                     <OrganizeForm form={nestedForm(form, "organize")} />
                     <FeatureToggle featureFlag="sales_channels">
@@ -224,15 +228,15 @@ const NewProduct = ({ onClose }: Props) => {
                     </FeatureToggle>
                   </div>
                 </div>
-              </Accordion.Item>
-              <Accordion.Item title="Variants" value="variants">
+              </Accordion.Item> */}
+
+              <Accordion.Item title="Thuộc tính" value="variants">
                 <p className="text-grey-50 inter-base-regular">
-                  Add variations of this product.
+                  Thêm màu sắc, kích cỡ giày
                   <br />
-                  Offer your customers different options for color, format,
-                  size, shape, etc.
+                  Chọn màu sắc và kích cỡ
                 </p>
-                <div className="mt-large">
+                <div className="mt-large ">
                   <AddVariantsForm
                     form={nestedForm(form, "variants")}
                     productCustoms={watchedCustoms}
@@ -240,7 +244,7 @@ const NewProduct = ({ onClose }: Props) => {
                   />
                 </div>
               </Accordion.Item>
-              <Accordion.Item title="Attributes" value="attributes">
+              {/* <Accordion.Item title="Attributes" value="attributes">
                 <p className="inter-base-regular text-grey-50">
                   Used for shipping and customs purposes.
                 </p>
@@ -252,17 +256,16 @@ const NewProduct = ({ onClose }: Props) => {
                   <h3 className="inter-base-semibold mb-base">Customs</h3>
                   <CustomsForm form={nestedForm(form, "customs")} />
                 </div>
-              </Accordion.Item>
-              <Accordion.Item title="Thumbnail" value="thumbnail">
+              </Accordion.Item> */}
+              <Accordion.Item title="Ảnh bìa" value="thumbnail">
                 <p className="inter-base-regular text-grey-50 mb-large">
-                  Used to represent your product during checkout, social sharing
-                  and more.
+                  Ảnh thu nhỏ của sản phẩm
                 </p>
                 <ThumbnailForm form={nestedForm(form, "thumbnail")} />
               </Accordion.Item>
-              <Accordion.Item title="Media" value="media">
+              <Accordion.Item title="Hình sản phẩm" value="media">
                 <p className="inter-base-regular text-grey-50 mb-large">
-                  Add images to your product.
+                  Thêm ảnh
                 </p>
                 <MediaForm form={nestedForm(form, "media")} />
               </Accordion.Item>
@@ -354,7 +357,7 @@ const createBlank = (): NewProductForm => {
       handle: "",
     },
     customs: {
-      hs_code: null,
+      hs_code: "null",
       mid_code: null,
       origin_country: null,
     },
@@ -381,9 +384,11 @@ const createBlank = (): NewProductForm => {
     thumbnail: {
       images: [],
     },
+    
     variants: {
       entries: [],
-      options: [],
+      options: [
+      ],
     },
   }
 }

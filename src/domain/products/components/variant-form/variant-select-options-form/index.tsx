@@ -23,10 +23,27 @@ type Props = {
   options: VariantOptionValueType[]
   onCreateOption: (optionId: string, value: string) => void
 }
+// const fakeProductOptions: VariantOptionValueType[] = [
+//   {
+//     label: "Red",
+//     value: "Red",
+//     option_id: "1", // Generate a unique option_id
+//   },
+//   {
+//     label: "Blue",
+//     value: "Blue",
+//     option_id: "1", // Generate a unique option_id
+//   },
+//   {
+//     label: "38",
+//     value: "38",
+//     option_id: "2", // Generate a unique option_id
+//   },
+// ];
 
 const VariantSelectOptionsForm = ({ form, options, onCreateOption }: Props) => {
   const { control, path } = form
-
+  console.log("VariantSelectOptionsForm::options: ", options)
   const { fields } = useFieldArray({
     control: form.control,
     name: path(),
@@ -42,6 +59,7 @@ const VariantSelectOptionsForm = ({ form, options, onCreateOption }: Props) => {
             control={control}
             name={path(`${index}.option`)}
             render={({ field: { value, onChange, onBlur, ref } }) => {
+              console.log("field: ", field)
               return (
                 <NextCreateableSelect
                   ref={ref}
