@@ -4,12 +4,14 @@ import dns from "dns"
 import path from "path"
 import { env } from "process"
 import { defineConfig } from "vite"
+import { resolve } from 'path';
 
 // Resolve localhost for Node v16 and older.
 // @see https://vitejs.dev/config/server-options.html#server-host.
 dns.setDefaultResultOrder("verbatim")
 
 export default defineConfig({
+  base: '/', // Set the base path to root
   plugins: [react()],
   test: {
     environment: "jsdom",
@@ -20,7 +22,7 @@ export default defineConfig({
   // Backwards-compat with Gatsby.
   publicDir: "static",
   build: {
-    outDir: "public",
+    outDir: resolve(__dirname, 'public'), // Output directory for production build
   },
   resolve: {
     alias: {
