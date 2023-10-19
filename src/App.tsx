@@ -6,6 +6,7 @@ import {
   RouterProvider,
 } from "react-router-dom"
 import Spinner from "./components/atoms/spinner"
+import DangKyPage from "./pages/dangky"
 
 const NotFound = lazy(() => import("./pages/404"))
 const Dashboard = lazy(() => import("./pages/a"))
@@ -21,9 +22,10 @@ const router = createBrowserRouter(
       <Route path="a/*" element={<Dashboard />} />
       <Route path="register" element={<InvitePage />} />
       <Route path="login" element={<LoginPage />} />
+      <Route path="dangky" element={<DangKyPage />} />
       <Route path="reset-password" element={<ResetPasswordPage />} />
       <Route path="*" element={<NotFound />} />
-      
+
     </>
   )
 )
