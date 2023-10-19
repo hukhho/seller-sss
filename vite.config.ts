@@ -11,8 +11,10 @@ import reactRefresh from '@vitejs/plugin-react-refresh'
 // Resolve localhost for Node v16 and older.
 // @see https://vitejs.dev/config/server-options.html#server-host.
 dns.setDefaultResultOrder("verbatim")
-const root = resolve(__dirname, 'src')
+
+const root = resolve(__dirname, '')
 const outDir = resolve(__dirname, 'dist')
+
 export default defineConfig({
   root,
   plugins: [react(), reactRefresh(), pluginRewriteAll()],
@@ -29,7 +31,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(root, 'index.html'),
-        login: resolve(root, 'pages/login', 'index.html'),
+        login: resolve(root, 'src/pages/login', 'index.html'),
       }
     }
   },
