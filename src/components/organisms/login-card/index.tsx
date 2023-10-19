@@ -55,7 +55,7 @@ const LoginCard: React.FC<LoginCardProps> = ({ toResetPassword }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col items-center">
         <span className="inter-2xlarge-semibold mt-4 text-grey-90">
-          Trang bán giày
+          Trang bán giày 123
         </span>
         <span className="inter-base-regular text-grey-50 mt-2">
            👋🏼
