@@ -25,7 +25,6 @@ const router = createBrowserRouter(
       <Route path="dangky" element={<DangKyPage />} />
       <Route path="reset-password" element={<ResetPasswordPage />} />
       <Route path="*" element={<NotFound />} />
-
     </>
   )
 )

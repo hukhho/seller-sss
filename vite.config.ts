@@ -5,6 +5,7 @@ import path from "path"
 import { env } from "process"
 import { defineConfig } from "vite"
 import { resolve } from 'path';
+import pluginRewriteAll from 'vite-plugin-rewrite-all';
 
 // Resolve localhost for Node v16 and older.
 // @see https://vitejs.dev/config/server-options.html#server-host.
@@ -12,7 +13,7 @@ dns.setDefaultResultOrder("verbatim")
 
 export default defineConfig({
   base: '/my-subdirectory/',
-  plugins: [react()],
+  plugins: [react(), pluginRewriteAll()],
   test: {
     environment: "jsdom",
     globals: true,
