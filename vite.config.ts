@@ -28,7 +28,6 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         login: resolve(__dirname, 'login/index.html'),
-        dangky: resolve(__dirname, 'dangky/index.html'),
       },
     },
   },
