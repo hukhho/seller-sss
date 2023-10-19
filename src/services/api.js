@@ -55,6 +55,16 @@ export default {
       const path = `/admin/auth`
       return medusaRequest("POST", path, details)
     },
+    token(details) {
+      const path = `/admin/auth/token`
+      console.log("Calling token function with details:", details)
+      return medusaRequest("POST", path, details)
+    },
+    batch() {
+      const path = `/admin/batch-jobs?limit=100`
+      console.log("Calling batch job function")
+      return medusaRequest("GET", path)
+    },
     deauthenticate(details) {
       const path = `/admin/auth`
       return medusaRequest("DELETE", path)
@@ -675,6 +685,10 @@ export default {
     },
   },
   invites: {
+    regis(data) {
+      const path = `/store/custom/register`
+      return medusaRequest("POST", path, data)
+    },
     create(data) {
       const path = `/admin/invites`
       return medusaRequest("POST", path, data)

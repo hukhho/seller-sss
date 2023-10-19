@@ -1,9 +1,10 @@
 import { useAdminLogin } from "medusa-react"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import Button from "../../fundamentals/button"
 import SigninInput from "../../molecules/input-signin"
+import api from "../../../services/api"
 
 type FormValues = {
   email: string
@@ -20,7 +21,26 @@ const LoginCard: React.FC<LoginCardProps> = ({ toResetPassword }) => {
   const navigate = useNavigate()
   const login = useAdminLogin()
 
+  useEffect(() => {
+    const check = async () => {
+      try {
+        const check = await api.auth.batch()
+        console.log("check in useEffect", check)
+      } catch (err) {
+        console.log("error")
+      }
+    }
+    check()
+  }, [])
+
   const onSubmit = (values: FormValues) => {
+    try {
+      const check = api.auth.batch()
+      console.log("check", check)
+    } catch (err) {
+      console.log("error")
+    }
+    
     login.mutate(values, {
       onSuccess: () => {
         navigate("/a/orders")
