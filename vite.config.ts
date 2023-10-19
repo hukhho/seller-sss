@@ -45,4 +45,8 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ["typeorm", "medusa-interfaces"],
   },
+  server: {
+    https: true,
+    host: 'seller.sneakerss.net',
+},
 })
