@@ -14,7 +14,7 @@ dns.setDefaultResultOrder("verbatim")
 const root = resolve(__dirname, 'src')
 const outDir = resolve(__dirname, 'dist')
 export default defineConfig({
-  base: '/my-subdirectory/',
+  root,
   plugins: [react(), reactRefresh(), pluginRewriteAll()],
   test: {
     environment: "jsdom",
