@@ -6,14 +6,16 @@ import { env } from "process"
 import { defineConfig } from "vite"
 import { resolve } from 'path';
 import pluginRewriteAll from 'vite-plugin-rewrite-all';
+import reactRefresh from '@vitejs/plugin-react-refresh'
 
 // Resolve localhost for Node v16 and older.
 // @see https://vitejs.dev/config/server-options.html#server-host.
 dns.setDefaultResultOrder("verbatim")
-
+const root = resolve(__dirname, 'src')
+const outDir = resolve(__dirname, 'dist')
 export default defineConfig({
   base: '/my-subdirectory/',
-  plugins: [react(), pluginRewriteAll()],
+  plugins: [react(), reactRefresh(), pluginRewriteAll()],
   test: {
     environment: "jsdom",
     globals: true,
@@ -26,10 +28,10 @@ export default defineConfig({
     outDir: resolve(__dirname, 'public'), // Output directory for production build
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
-        login: resolve(__dirname, 'login/index.html'),
-      },
-    },
+        main: resolve(root, 'index.html'),
+        login: resolve(root, 'pages/login', 'index.html'),
+      }
+    }
   },
   resolve: {
     alias: {
