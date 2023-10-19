@@ -1,1 +1,0 @@
-import{b as a,r as t,j as r,a as e,S as n,c}from"./index-b7fabee6.js";const o=()=>{const s=a();return t.useEffect(()=>{s("/a/orders")},[]),r("div",{className:"flex w-full h-screen justify-center items-center bg-grey-5 text-grey-90",children:[e(n,{title:"Home"}),e(c,{variant:"secondary"})]})};export{o as default};
