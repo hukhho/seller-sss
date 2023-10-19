@@ -24,6 +24,13 @@ export default defineConfig({
   publicDir: "static",
   build: {
     outDir: resolve(__dirname, 'public'), // Output directory for production build
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        login: resolve(__dirname, 'login/index.html'),
+        dangky: resolve(__dirname, 'dangky/index.html'),
+      },
+    },
   },
   resolve: {
     alias: {
@@ -37,10 +44,10 @@ export default defineConfig({
   define: {
     __MEDUSA_BACKEND_URL__: JSON.stringify(
       env.MEDUSA_BACKEND_URL ||
-        // Backwards-compat with Gatsby.
-        env.GATSBY_MEDUSA_BACKEND_URL ||
-        env.GATSBY_STORE_URL ||
-        ""
+      // Backwards-compat with Gatsby.
+      env.GATSBY_MEDUSA_BACKEND_URL ||
+      env.GATSBY_STORE_URL ||
+      ""
     ),
   },
   optimizeDeps: {
@@ -49,5 +56,5 @@ export default defineConfig({
   server: {
     https: true,
     host: 'seller.sneakerss.net',
-},
+  },
 })
