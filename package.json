@@ -107,6 +107,8 @@
     "vitest": "^0.28.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite --port 7000",
     "develop": "npm run dev",
     "check": "tsc",

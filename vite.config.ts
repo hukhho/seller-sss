@@ -11,7 +11,7 @@ import { resolve } from 'path';
 dns.setDefaultResultOrder("verbatim")
 
 export default defineConfig({
-  base: '/subscriber/',
+  base: '/my-subdirectory/',
   plugins: [react()],
   test: {
     environment: "jsdom",
