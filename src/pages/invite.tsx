@@ -77,32 +77,30 @@ const InvitePage = () => {
     }
 
     api.invites
-    .regis(data)
-    .then((res) => {
-      console.log("res", res)
-      console.log("res.data", res.data)
-      if (res.status === 200 && !res.data?.error) {
-        notification("Success", "Successfully registered", "success")
-        navigate("/login")
-      } else {
-        console.log("error", res.data.error.message)
+      .regis(data)
+      .then((res) => {
+        console.log("res", res)
+        console.log("res.data", res.data)
+        if (res.status === 200 && !res.data?.error) {
+          notification("Success", "Successfully registered", "success")
+          navigate("/login")
+        } else {
+          console.log("error", res.data.error.message)
 
-        setErrorMessage(res.data?.error?.message)
+          setErrorMessage(res.data?.error?.message)
 
-        notification("Error", res.data?.error?.message, "error")
-      }
-    })
-    .catch((error) => {
-      setErrorMessage(error.message)
-      notification(
-        "Error",
-        "An error occurred while making the request",
-        "error"
-      )
-      console.error("Axios Error:", error)
-    })
-    
-
+          notification("Error", res.data?.error?.message, "error")
+        }
+      })
+      .catch((error) => {
+        setErrorMessage(error.message)
+        notification(
+          "Error",
+          "An error occurred while making the request",
+          "error"
+        )
+        console.error("Axios Error:", error)
+      })
   }
 
   useEffect(() => {
@@ -129,8 +127,6 @@ const InvitePage = () => {
                 className="flex w-full flex-col items-center py-12 px-[120px]"
                 onSubmit={handleSubmit(handleAcceptInvite)}
               >
-                
-                
                 <>
                   <span className="inter-2xlarge-semibold mt-4 text-grey-90">
                     Welcome to the team!
@@ -170,8 +166,8 @@ const InvitePage = () => {
                       The two passwords are not the same
                     </span>
                   )}
-                  <div className="flex items-center justify-center mt-base">
-                    <span className="text-rose-50 w-full mt-2 inter-small-regular mb-2">
+                  <div className="mt-base flex items-center justify-center">
+                    <span className="inter-small-regular mt-2 mb-2 w-full text-rose-50">
                       {errorMessage}
                     </span>
                   </div>
@@ -196,10 +192,7 @@ const InvitePage = () => {
             </div>
           </div>
         </LoginLayout>
-      ) : 
-      
-      
-      (
+      ) : (
         <div className="h-screen w-full overflow-hidden bg-grey-90">
           <div className="absolute inset-0 z-10 mx-auto flex h-full max-w-[1080px] flex-grow flex-col items-center justify-center">
             <MedusaVice className="mb-3xlarge" />
