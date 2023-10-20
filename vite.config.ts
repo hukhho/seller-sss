@@ -12,12 +12,9 @@ import reactRefresh from '@vitejs/plugin-react-refresh'
 // @see https://vitejs.dev/config/server-options.html#server-host.
 dns.setDefaultResultOrder("verbatim")
 
-const root = resolve(__dirname, '')
-const outDir = resolve(__dirname, 'dist')
 
 export default defineConfig({
-  root,
-  plugins: [react(), reactRefresh(), pluginRewriteAll()],
+  plugins: [react()],
   test: {
     environment: "jsdom",
     globals: true,
@@ -25,16 +22,16 @@ export default defineConfig({
     api: 7001,
   },
   // Backwards-compat with Gatsby.
-  publicDir: "static",
-  build: {
-    outDir: resolve(__dirname, 'public'), // Output directory for production build
-    rollupOptions: {
-      input: {
-        main: resolve(root, 'index.html'),
-        login: resolve(root, 'src/pages/login', 'index.html'),
-      }
-    }
-  },
+  // publicDir: "static",
+  // build: {
+  //   outDir: resolve(__dirname, 'public'), // Output directory for production build
+  //   rollupOptions: {
+  //     input: {
+  //       main: resolve(root, 'index.html'),
+  //       login: resolve(root, 'src/pages/login', 'index.html'),
+  //     }
+  //   }
+  // },
   resolve: {
     alias: {
       gatsby: path.resolve(__dirname, "src/compat/gatsby-compat.tsx"),
@@ -47,7 +44,6 @@ export default defineConfig({
   define: {
     __MEDUSA_BACKEND_URL__: JSON.stringify(
       env.MEDUSA_BACKEND_URL ||
-      // Backwards-compat with Gatsby.
       env.GATSBY_MEDUSA_BACKEND_URL ||
       env.GATSBY_STORE_URL ||
       ""
@@ -55,9 +51,5 @@ export default defineConfig({
   },
   optimizeDeps: {
     exclude: ["typeorm", "medusa-interfaces"],
-  },
-  server: {
-    https: true,
-    host: 'seller.sneakerss.net',
   },
 })
