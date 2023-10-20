@@ -92,7 +92,7 @@ const LoginCard: React.FC<LoginCardProps> = ({ toResetPassword }) => {
         >
           Quên mật khẩu?
         </span>
-        <Link to="/login" className="inter-small-regular mt-large text-grey-50">
+        <Link to="/register" className="inter-small-regular mt-large text-grey-50">
           Đăng ký tài khoản
         </Link>
       </div>
