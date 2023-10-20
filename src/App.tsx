@@ -29,20 +29,15 @@ const router = createBrowserRouter(
 )
 
 const Loading = () => (
-  <div className="flex h-screen w-full items-center justify-center bg-grey-5 text-grey-90">
+  <div className="flex w-full h-screen justify-center items-center bg-grey-5 text-grey-90">
     <Spinner variant="secondary" />
   </div>
 )
 
-const App = () => {
-  console.log("App.tsx, router: ", router)
-
-  return
-  {
-    <Suspense fallback={<Loading />}>
-      <RouterProvider router={router} />
-    </Suspense>
-  }
-}
+const App = () => (
+  <Suspense fallback={<Loading />}>
+    <RouterProvider router={router} />
+  </Suspense>
+)
 
 export default App
