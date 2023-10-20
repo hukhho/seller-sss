@@ -31,7 +31,7 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: resolve('index.html'),
+        main: resolve(root, 'index.html'),
         about: resolve(root, 'testnha', 'index.html'),
       }
     }
