@@ -12,9 +12,12 @@ import reactRefresh from '@vitejs/plugin-react-refresh'
 // @see https://vitejs.dev/config/server-options.html#server-host.
 dns.setDefaultResultOrder("verbatim")
 
+const root = resolve(__dirname, 'src')
+const outDir = resolve(__dirname, 'dist')
 
 export default defineConfig({
-  plugins: [react()],
+  root,
+  plugins: [reactRefresh()],
   test: {
     environment: "jsdom",
     globals: true,
@@ -23,15 +26,16 @@ export default defineConfig({
   },
   // Backwards-compat with Gatsby.
   // publicDir: "static",
-  // build: {
-  //   outDir: resolve(__dirname, 'public'), // Output directory for production build
-  //   rollupOptions: {
-  //     input: {
-  //       main: resolve(root, 'index.html'),
-  //       login: resolve(root, 'src/pages/login', 'index.html'),
-  //     }
-  //   }
-  // },
+  build: {
+    outDir,
+    emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        main: resolve(root, 'index.html'),
+        about: resolve(root, 'about', 'index.html'),
+      }
+    }
+  },
   resolve: {
     alias: {
       gatsby: path.resolve(__dirname, "src/compat/gatsby-compat.tsx"),
