@@ -43,6 +43,7 @@ export default defineConfig({
         __dirname,
         "src/compat/reach-router-compat.tsx"
       ),
+      '@/assets': '/src/assets',  
     },
   },
   define: {
