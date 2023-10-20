@@ -2,7 +2,6 @@ import { MedusaProvider } from "medusa-react"
 import type { PropsWithChildren } from "react"
 import React from "react"
 import { createRoot } from "react-dom/client"
-import "@/assets/styles/global.css"
 
 const Page = ({ children }: PropsWithChildren) => {
   return (
