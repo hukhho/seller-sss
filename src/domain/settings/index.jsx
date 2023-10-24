@@ -24,7 +24,7 @@ import KeyIcon from "../../components/fundamentals/icons/key-icon"
 const SettingsIndex = () => {
   return (
     <SettingsOverview>
-      <SettingsCard
+      {/* <SettingsCard
         heading={"Regions"}
         description={"Manage the markets you will operate within"}
         icon={<MapPinIcon />}
@@ -60,7 +60,7 @@ const SettingsIndex = () => {
         description={"Manage users of your Medusa Store"}
         icon={<UsersIcon />}
         to={`/a/settings/team`}
-      />
+      /> */}
       <SettingsCard
         heading={"Personal Information"}
         description={"Manage your Medusa profile"}
@@ -68,12 +68,12 @@ const SettingsIndex = () => {
         to={`/a/settings/personal-information`}
       />
       <SettingsCard
-        heading={"hello@medusajs.com"}
+        heading={"hungbxse150126@fpt.edu.vn"}
         description={"Can’t find the answers you’re looking for?"}
         icon={<MailIcon />}
-        externalLink={"mailto: hello@medusajs.com"}
+        externalLink={"mailto: hungbxse150126@fpt.edu.vn"}
       />
-      <SettingsCard
+      {/* <SettingsCard
         heading={"Tax Settings"}
         description={"Manage taxes across regions and products"}
         icon={<TaxesIcon />}
@@ -94,7 +94,7 @@ const SettingsIndex = () => {
           icon={<KeyIcon />}
           to={`/a/publishable-api-keys`}
         />
-      </FeatureToggle>
+      </FeatureToggle> */}
     </SettingsOverview>
   )
 }
@@ -102,13 +102,13 @@ const SettingsIndex = () => {
 const Settings = () => (
   <Routes className="h-full">
     <Route index element={<SettingsIndex />} />
-    <Route path="/details" element={<Details />} />
+    {/* <Route path="/details" element={<Details />} />
     <Route path="/regions/*" element={<Regions />} />
     <Route path="/currencies" element={<CurrencySettings />} />
     <Route path="/return-reasons" element={<ReturnReasons />} />
-    <Route path="/team" element={<Users />} />
+    <Route path="/team" element={<Users />} /> */}
     <Route path="/personal-information" element={<PersonalInformation />} />
-    <Route path="/taxes" element={<Taxes />} />
+    {/* <Route path="/taxes" element={<Taxes />} /> */}
   </Routes>
 )
 

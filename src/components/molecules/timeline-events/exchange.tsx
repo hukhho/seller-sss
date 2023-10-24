@@ -79,7 +79,7 @@ const Exchange: React.FC<ExchangeProps> = ({ event, refetch }) => {
   const { orderRelations } = useOrdersExpandParam()
   const { order } = useAdminOrder(event.orderId, {
     expand: orderRelations,
-    fields: orderReturnableFields,
+    // fields: orderReturnableFields,
   })
 
   const notification = useNotification()

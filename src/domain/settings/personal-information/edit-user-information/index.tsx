@@ -54,6 +54,8 @@ const EditUserInformation = ({ user }: Props) => {
         >
           Edit information
         </Button>
+
+       
       </div>
       {user && (
         <EditUserInformationModal open={state} onClose={close} user={user} />

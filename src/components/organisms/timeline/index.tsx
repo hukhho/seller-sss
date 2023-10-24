@@ -63,7 +63,7 @@ const Timeline: React.FC<TimelineProps> = ({ orderId }) => {
   const createNote = useAdminCreateNote()
   const { order } = useAdminOrder(orderId, {
     expand: orderRelations,
-    fields: orderReturnableFields,
+    // fields: orderReturnableFields,
   })
 
   const [showRequestReturn, setShowRequestReturn] = useState(false)
@@ -76,21 +76,21 @@ const Timeline: React.FC<TimelineProps> = ({ orderId }) => {
   } = useToggleState()
 
   const actions: ActionType[] = [
-    {
-      icon: <BackIcon size={20} />,
-      label: "Request Return",
-      onClick: () => setShowRequestReturn(true),
-    },
-    {
-      icon: <RefreshIcon size={20} />,
-      label: "Register Exchange",
-      onClick: () => setshowCreateSwap(true),
-    },
-    {
-      icon: <AlertIcon size={20} />,
-      label: "Register Claim",
-      onClick: openRegisterClaim,
-    },
+    // {
+    //   icon: <BackIcon size={20} />,
+    //   label: "Request Return",
+    //   onClick: () => setShowRequestReturn(true),
+    // },
+    // {
+    //   icon: <RefreshIcon size={20} />,
+    //   label: "Register Exchange",
+    //   onClick: () => setshowCreateSwap(true),
+    // },
+    // {
+    //   icon: <AlertIcon size={20} />,
+    //   label: "Register Claim",
+    //   onClick: openRegisterClaim,
+    // },
   ]
 
   const handleCreateNote = (value: string | undefined) => {

@@ -29,10 +29,10 @@ const VariantStockForm = ({ form }: Props) => {
   return (
     <div>
       <p className="inter-base-regular text-grey-50">
-        Configure the inventory and stock for this variant.
+        Quản lý tồn kho cho sản phẩm này.
       </p>
       <div className="pt-large flex flex-col gap-y-xlarge">
-        <div className="flex flex-col gap-y-2xsmall">
+        {/* <div className="flex flex-col gap-y-2xsmall">
           <div className="flex items-center justify-between">
             <h3 className="inter-base-semibold mb-2xsmall">Manage inventory</h3>
             <Controller
@@ -47,8 +47,8 @@ const VariantStockForm = ({ form }: Props) => {
             When checked Medusa will regulate the inventory when orders and
             returns are made.
           </p>
-        </div>
-        <div className="flex flex-col gap-y-2xsmall">
+        </div> */}
+        {/* <div className="flex flex-col gap-y-2xsmall">
           <div className="flex items-center justify-between">
             <h3 className="inter-base-semibold mb-2xsmall">Allow backorders</h3>
             <Controller
@@ -63,17 +63,17 @@ const VariantStockForm = ({ form }: Props) => {
             When checked the product will be available for purchase despite the
             product being sold out
           </p>
-        </div>
+        </div> */}
         <div className="grid grid-cols-2 gap-large">
           <InputField
-            label="Stock keeping unit (SKU)"
+            label="(SKU)"
             placeholder="SUN-G, JK1234..."
             {...register(path("sku"))}
           />
           <InputField
-            label="Quantity in stock"
+            label="Số lượng tồn kho"
             type="number"
-            placeholder="100..."
+            placeholder="1..."
             errors={errors}
             {...register(path("inventory_quantity"), {
               valueAsNumber: true,

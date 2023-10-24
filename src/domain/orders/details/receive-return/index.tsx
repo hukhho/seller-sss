@@ -30,7 +30,7 @@ export const ReceiveReturnMenu = ({ order, returnRequest, onClose }: Props) => {
   const { mutate, isLoading } = useAdminReceiveReturn(returnRequest.id)
   const { orderRelations } = useOrdersExpandParam()
   const { refetch } = useAdminOrder(order.id, {
-    fields: orderReturnableFields,
+    // fields: orderReturnableFields,
     expand: orderRelations,
   })
 

@@ -61,16 +61,12 @@ const EditFlowVariantForm = ({ form }: Props) => {
 
   return (
     <Accordion type="multiple" defaultValue={["general"]}>
-      <Accordion.Item title="General" value="general" required>
+      <Accordion.Item title="Thông tin chung" value="general" required>
         <div>
-          <VariantGeneralForm form={nestedForm(form, "general")} />
+          {/* <VariantGeneralForm form={nestedForm(form, "general")} /> */}
           <div className="mt-xlarge">
             <div className="flex items-center gap-x-2xsmall mb-base">
-              <h3 className="inter-base-semibold">Options</h3>
-              <IconTooltip
-                type="info"
-                content="Options are used to define the color, size, etc. of the variant."
-              />
+           
             </div>
             <div className="grid grid-cols-2 gap-large pb-2xsmall">
               {fields.map((field, index) => {
@@ -90,13 +86,13 @@ const EditFlowVariantForm = ({ form }: Props) => {
           </div>
         </div>
       </Accordion.Item>
-      <Accordion.Item title="Pricing" value="pricing">
+      <Accordion.Item title="Giá" value="pricing">
         <VariantPricesForm form={nestedForm(form, "prices")} />
       </Accordion.Item>
-      <Accordion.Item title="Stock & Inventory" value="stock">
+      <Accordion.Item title="Quản lý tồn kho" value="stock">
         <VariantStockForm form={nestedForm(form, "stock")} />
       </Accordion.Item>
-      <Accordion.Item title="Shipping" value="shipping">
+      {/* <Accordion.Item title="Shipping" value="shipping">
         <p className="inter-base-regular text-grey-50">
           Shipping information can be required depending on your shipping
           provider, and whether or not you are shipping internationally.
@@ -115,7 +111,7 @@ const EditFlowVariantForm = ({ form }: Props) => {
           </p>
           <CustomsForm form={nestedForm(form, "customs")} />
         </div>
-      </Accordion.Item>
+      </Accordion.Item> */}
     </Accordion>
   )
 }

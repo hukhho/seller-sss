@@ -220,50 +220,50 @@ const OrderDetails = () => {
   const allFulfillments = gatherAllFulfillments(order)
 
   const customerActionables: ActionType[] = [
-    {
-      label: "Go to Customer",
-      icon: <DetailsIcon size={"20"} />,
-      onClick: () => navigate(`/a/customers/${order?.customer.id}`),
-    },
-    {
-      label: "Transfer ownership",
-      icon: <RefreshIcon size={"20"} />,
-      onClick: () => toggleTransferOrderModal(),
-    },
+    // {
+    //   label: "Go to Customer",
+    //   icon: <DetailsIcon size={"20"} />,
+    //   onClick: () => navigate(`/a/customers/${order?.customer.id}`),
+    // },
+    // {
+    //   label: "Transfer ownership",
+    //   icon: <RefreshIcon size={"20"} />,
+    //   onClick: () => toggleTransferOrderModal(),
+    // },
   ]
 
-  customerActionables.push({
-    label: "Edit Shipping Address",
-    icon: <TruckIcon size={"20"} />,
-    onClick: () =>
-      setAddressModal({
-        address: order?.shipping_address,
-        type: AddressType.SHIPPING,
-      }),
-  })
+  // customerActionables.push({
+  //   label: "Edit Shipping Address",
+  //   icon: <TruckIcon size={"20"} />,
+  //   onClick: () =>
+  //     setAddressModal({
+  //       address: order?.shipping_address,
+  //       type: AddressType.SHIPPING,
+  //     }),
+  // })
 
-  customerActionables.push({
-    label: "Edit Billing Address",
-    icon: <DollarSignIcon size={"20"} />,
-    onClick: () => {
-      setAddressModal({
-        address: order?.billing_address,
-        type: AddressType.BILLING,
-      })
-    },
-  })
+  // customerActionables.push({
+  //   label: "Edit Billing Address",
+  //   icon: <DollarSignIcon size={"20"} />,
+  //   onClick: () => {
+  //     setAddressModal({
+  //       address: order?.billing_address,
+  //       type: AddressType.BILLING,
+  //     })
+  //   },
+  // })
 
-  if (order?.email) {
-    customerActionables.push({
-      label: "Edit Email Address",
-      icon: <MailIcon size={"20"} />,
-      onClick: () => {
-        setEmailModal({
-          email: order?.email,
-        })
-      },
-    })
-  }
+  // if (order?.email) {
+  //   customerActionables.push({
+  //     label: "Edit Email Address",
+  //     icon: <MailIcon size={"20"} />,
+  //     onClick: () => {
+  //       setEmailModal({
+  //         email: order?.email,
+  //       })
+  //     },
+  //   })
+  // }
 
   if (!order && isLoading) {
     return (
@@ -309,14 +309,15 @@ const OrderDetails = () => {
                     "D MMMM YYYY hh:mm a"
                   )}
                   status={<OrderStatusComponent status={order.status} />}
-                  forceDropdown={true}
+
+                  // forceDropdown={true}
                   actionables={[
-                    {
-                      label: "Cancel Order",
-                      icon: <CancelIcon size={"20"} />,
-                      variant: "danger",
-                      onClick: () => handleDeleteOrder(),
-                    },
+                    // {
+                    //   label: "Cancel Order",
+                    //   icon: <CancelIcon size={"20"} />,
+                    //   variant: "danger",
+                    //   onClick: () => handleDeleteOrder(),
+                    // },
                   ]}
                 >
                   <div className="mt-6 flex space-x-6 divide-x">
@@ -356,14 +357,15 @@ const OrderDetails = () => {
                       className={"mb-4 h-auto min-h-0 w-full"}
                       title="Summary"
                       actionables={
-                        isFeatureEnabled("order_editing")
-                          ? [
-                              {
-                                label: "Edit Order",
-                                onClick: showModal,
-                              },
-                            ]
-                          : undefined
+                        undefined
+                        // isFeatureEnabled("order_editing")
+                        //   ? [
+                        //       {
+                        //         label: "Edit Order",
+                        //         onClick: showModal,
+                        //       },
+                        //     ]
+                        //   : undefined
                       }
                     >
                       <div className="mt-6">
@@ -452,12 +454,14 @@ const OrderDetails = () => {
                   status={
                     <PaymentStatusComponent status={order.payment_status} />
                   }
-                  customActionable={
-                    <PaymentActionables
-                      order={order}
-                      capturePayment={capturePayment}
-                      showRefundMenu={() => setShowRefund(true)}
-                    />
+                  customActionable={ 
+                  <>
+                  </>
+                    // <PaymentActionables
+                    //   order={order}
+                    //   capturePayment={capturePayment}
+                    //   showRefundMenu={() => setShowRefund(true)}
+                    // />
                   }
                 >
                   <div className="mt-6">
@@ -527,13 +531,14 @@ const OrderDetails = () => {
                     order.fulfillment_status !== "fulfilled" &&
                     order.status !== "canceled" &&
                     order.fulfillment_status !== "shipped" && (
-                      <Button
-                        variant="secondary"
-                        size="small"
-                        onClick={() => setShowFulfillment(true)}
-                      >
-                        Create Fulfillment
-                      </Button>
+                      <></>
+                      // <Button
+                      //   variant="secondary"
+                      //   size="small"
+                      //   onClick={() => setShowFulfillment(true)}
+                      // >
+                      //   Create Fulfillment
+                      // </Button>
                     )
                   }
                 >

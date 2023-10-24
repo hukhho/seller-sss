@@ -19,7 +19,7 @@ import ImportProducts from "../batch-job/import"
 import NewProduct from "../new"
 import { PollingContext } from "../../../context/polling"
 
-const VIEWS = ["products", "collections"]
+const VIEWS = ["products"]
 
 const Overview = () => {
   const navigate = useNavigate()
@@ -62,14 +62,14 @@ const Overview = () => {
       case "products":
         return (
           <div className="flex space-x-2">
-            <Button
+            {/* <Button
               variant="secondary"
               size="small"
               onClick={() => openImportModal()}
             >
               <UploadIcon size={20} />
               Import Products
-            </Button>
+            </Button> */}
             <Button
               variant="secondary"
               size="small"

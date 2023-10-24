@@ -49,13 +49,13 @@ const GeneralSection = ({ product }: Props) => {
     },
   ]
 
-  if (isFeatureEnabled("sales_channels")) {
-    actions.splice(1, 0, {
-      label: "Edit Sales Channels",
-      onClick: toggleChannels,
-      icon: <ChannelsIcon size={20} />,
-    })
-  }
+  // if (isFeatureEnabled("sales_channels")) {
+  //   actions.splice(1, 0, {
+  //     label: "Edit Sales Channels",
+  //     onClick: toggleChannels,
+  //     icon: <ChannelsIcon size={20} />,
+  //   })
+  // }
 
   return (
     <>
@@ -77,7 +77,7 @@ const GeneralSection = ({ product }: Props) => {
         </p>
         <ProductTags product={product} />
         <ProductDetails product={product} />
-        <ProductSalesChannels product={product} />
+        {/* <ProductSalesChannels product={product} /> */}
       </Section>
 
       <GeneralModal product={product} open={infoState} onClose={closeInfo} />

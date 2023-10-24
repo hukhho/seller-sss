@@ -121,12 +121,12 @@ const VariantsTable = ({ variants, actions }: Props) => {
                     forceDropdown
                     actions={[
                       {
-                        label: "Edit Variant",
+                        label: "Chỉnh sửa thuộc tính",
                         icon: <EditIcon size="20" />,
                         onClick: () => updateVariant(row.original),
                       },
                       {
-                        label: "Duplicate Variant",
+                        label: "Tạo bản sao",
                         onClick: () =>
                           // @ts-ignore
                           duplicateVariant({
@@ -136,7 +136,7 @@ const VariantsTable = ({ variants, actions }: Props) => {
                         icon: <DuplicateIcon size="20" />,
                       },
                       {
-                        label: "Delete Variant",
+                        label: "Xóa thuộc tính",
                         onClick: () => deleteVariant(row.original.id),
                         icon: <TrashIcon size="20" />,
                         variant: "danger",

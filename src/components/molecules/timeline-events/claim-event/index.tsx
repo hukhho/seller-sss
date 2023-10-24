@@ -49,7 +49,7 @@ const Claim = ({ event }: Props) => {
   const { orderRelations } = useOrdersExpandParam()
   // Orders and returns aren't linked in `medusa-react` so we need to manually refetch the order
   const { refetch } = useAdminOrder(event.orderId, {
-    fields: orderReturnableFields,
+    // fields: orderReturnableFields,
     expand: orderRelations,
   })
 

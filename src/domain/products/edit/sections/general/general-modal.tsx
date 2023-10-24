@@ -93,7 +93,7 @@ const GeneralModal = ({ product, open, onClose }: Props) => {
               <h2 className="inter-base-semibold mb-base">Organize Product</h2>
               <OrganizeForm form={nestedForm(form, "organize")} />
             </div>
-            <DiscountableForm form={nestedForm(form, "discountable")} />
+            {/* <DiscountableForm form={nestedForm(form, "discountable")} /> */}
           </Modal.Content>
           <Modal.Footer>
             <div className="flex gap-x-2 justify-end w-full">

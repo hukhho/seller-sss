@@ -81,7 +81,7 @@ const CreateFlowVariantForm = ({ form, options, onCreateOption }: Props) => {
       <Accordion.Item title="Pricing" value="pricing">
         <VariantPricesForm form={nestedForm(form, "prices")} />
       </Accordion.Item>
-      <Accordion.Item className="hidden" title="Stock & Inventory" value="stock">
+      <Accordion.Item className="hidden" title="Quản lý tồn kho" value="stock">
         <VariantStockForm form={nestedForm(form, "stock")} />
       </Accordion.Item>
       <Accordion.Item className="hidden" title="Shipping" value="shipping">

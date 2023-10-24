@@ -7,18 +7,11 @@ import PrivateRoute from "../components/private-route"
 import SEO from "../components/seo"
 import Layout from "../components/templates/layout"
 import AnalyticsProvider from "../context/analytics"
-// import Collections from "../domain/collections"
-// import Customers from "../domain/customers"
-// import Discounts from "../domain/discounts"
-// import GiftCards from "../domain/gift-cards"
-// import Inventory from "../domain/inventory"
-// import Oauth from "../domain/oauth"
-// import Orders from "../domain/orders"
-// import DraftOrders from "../domain/orders/draft-orders"
-// import Pricing from "../domain/pricing"
+
+import Orders from "../domain/orders"
+
 import ProductsRoute from "../domain/products"
-import PublishableApiKeys from "../domain/publishable-api-keys"
-import SalesChannels from "../domain/sales-channels"
+
 import Settings from "../domain/settings"
 
 const IndexPage = () => {
@@ -41,15 +34,16 @@ const DashboardRoutes = () => {
           <SEO title="SSS Seller Page" />
           <Routes className="h-full">
             {/* <Route path="oauth/:app_name" element={<Oauth />} /> */}
+            <Route path="orders/*" element={<Orders />} />
             <Route path="products/*" element={<ProductsRoute />} />
+            <Route path="settings/*" element={<Settings />} />
+
             {/* <Route path="collections/*" element={<Collections />} />
             <Route path="gift-cards/*" element={<GiftCards />} />
-            <Route path="orders/*" element={<Orders />} />
             <Route path="draft-orders/*" element={<DraftOrders />} />
             <Route path="discounts/*" element={<Discounts />} />
             <Route path="customers/*" element={<Customers />} />
             <Route path="pricing/*" element={<Pricing />} />
-            <Route path="settings/*" element={<Settings />} />
             <Route path="sales-channels/*" element={<SalesChannels />} /> */}
             {/* <Route
               path="publishable-api-keys/*"

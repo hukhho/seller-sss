@@ -10,7 +10,7 @@ const VariantPricesForm = ({ form }: Props) => {
   return (
     <div>
       <p className="inter-base-regular text-grey-50">
-        Configure the pricing for this variant.
+        Giá sản phẩm
       </p>
       <div className="pt-large">
         <PricesForm form={form} />

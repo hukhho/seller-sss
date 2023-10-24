@@ -15,7 +15,7 @@ import { PollingContext } from "../../context/polling"
 import Details from "./details"
 import { transformFiltersAsExportContext } from "./utils"
 
-const VIEWS = ["orders", "drafts"]
+const VIEWS = ["orders"]
 
 const OrderIndex = () => {
   const view = "orders"

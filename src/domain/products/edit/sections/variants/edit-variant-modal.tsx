@@ -54,7 +54,7 @@ const EditVariantModal = ({
     <Modal handleClose={handleClose}>
       <Modal.Header handleClose={handleClose}>
         <h1 className="inter-xlarge-semibold">
-          Edit Variant
+          Chỉnh thuộc tính sản phẩm
           {variant.title && (
             <span className="text-grey-50 inter-xlarge-regular">
               {" "}

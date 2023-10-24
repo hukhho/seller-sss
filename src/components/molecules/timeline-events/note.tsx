@@ -35,16 +35,17 @@ const Note: React.FC<NoteProps> = ({ event }) => {
         icon={<Avatar user={user} />}
         time={event.time}
         topNode={
-          <EventActionables
-            actions={[
-              {
-                label: "Delete",
-                icon: <TrashIcon size={20} />,
-                onClick: () => setShowDelete(!showDelete),
-                variant: "danger",
-              },
-            ]}
-          />
+          <></>
+          // <EventActionables
+          //   actions={[
+          //     // {
+          //     //   label: "Delete",
+          //     //   icon: <TrashIcon size={20} />,
+          //     //   onClick: () => setShowDelete(!showDelete),
+          //     //   variant: "danger",
+          //     // },
+          //   ]}
+          // />
         }
         isFirst={event.first}
       >

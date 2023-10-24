@@ -684,6 +684,17 @@ export default {
       return medusaRequest("GET", path)
     },
   },
+  deposits: {
+    // regis(data) {
+    //   const path = `/store/custom/register`
+    //   return medusaRequest("POST", path, data)
+    // },
+    deposit(data) {
+      const path = `/admin/custom/deposit`
+      return medusaRequest("POST", path, data)
+    },
+   
+  },
   invites: {
     regis(data) {
       const path = `/store/custom/register`

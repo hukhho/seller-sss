@@ -13,6 +13,7 @@ const CustomerIndex = () => {
           customHeader={<CustomersPageTableHeader activeView="customers" />}
           className="h-fit"
         >
+          CC
           <CustomerTable />
         </BodyCard>
       </div>
