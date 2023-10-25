@@ -3,6 +3,11 @@ import { useProducts } from "medusa-react"
 import { useParams } from "react-router-dom"
 import { Product } from "@medusajs/medusa"
 import Button from "../../../../components/fundamentals/button"
+import { useEffect, useState } from "react"
+import api from "../../../../services/api"
+import { s } from "vitest/dist/env-afee91f0"
+import useNotification from "../../../../hooks/use-notification"
+import { consolidateImages } from "../../../../utils/consolidate-images"
 
 type AdminDeposit = {
   id: string
@@ -39,9 +44,27 @@ const depositsData = {
     // Add more deposit objects here if needed
   ],
 }
-
 const DepositTable = () => {
+  const [data, setData] = useState([])
+  const getListDeposit = () => {
+    console.log("getListDeposit called")
+    api.deposits.list()
+    .then((res) => {
+      console.log("res.data", res.data)
+      if (res.status === 200 && !res.data?.error) {
+        setData(res.data.deposits)
+      } else {
+        console.log("error", res.data.error.message)
+      }
+    })
+  }
+  useEffect(() => {
+    getListDeposit()
+  }, [])
+
+
   const deposits = depositsData.deposits
+  const notification = useNotification()
 
   function createQrCode(deposit) {
     console.log("createQrCode", "createQrCode")
@@ -56,8 +79,21 @@ const DepositTable = () => {
     console.log(`Create QR CODE with ID: ${deposit.id}`)
   }
   const handleSentMoney = (deposit) => {
+    console.log("deposit", deposit)
     console.log(`Sent Money: ${deposit.id}`)
-    
+
+    api.deposits.update(deposit.id)
+    .then((res) => {
+      console.log("res.data", res.data)
+      if (res.status === 200 && !res.data?.error) {
+        notification("Success", "Successfully banked", "success")
+      } else {
+        console.log("error", res.data.error.message)
+        notification("Error", "Failed banked", "error")
+      }
+    })
+    getListDeposit()
+
   }
   return (
     <div>
@@ -73,11 +109,11 @@ const DepositTable = () => {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {deposits.map((deposit) => (
+          {data && data.map((deposit) => (
             <Table.Row key={deposit.id}>
               <Table.Cell>{deposit.txn}</Table.Cell>
               <Table.Cell>{deposit.fiat_amount}</Table.Cell>
-              <Table.Cell>{deposit.method}</Table.Cell>
+              <Table.Cell>{deposit.typeTrans}</Table.Cell>
               <Table.Cell>{deposit.status}</Table.Cell>
               <Table.Cell>{deposit.note}</Table.Cell>
               <Table.Cell>
@@ -87,16 +123,16 @@ const DepositTable = () => {
                       variant="secondary"
                       size="small"
                       disabled={false}
-                      onClick={handleApproveClick}
-                    >
+                      onClick={() => handleApproveClick(deposit)} // Pass the deposit object to the function
+                      >
                       Tạo mã QR
                     </Button>
                     <Button
                       variant="secondary"
                       size="small"
                       disabled={false}
-                      onClick={handleApproveClick}
-                    >
+                      onClick={() => handleSentMoney(deposit)} // Pass the deposit object to the function
+                      >
                       Đã chuyển khoản
                     </Button>
                   </div>

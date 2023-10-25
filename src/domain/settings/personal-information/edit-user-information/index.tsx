@@ -9,7 +9,7 @@ type Props = {
   user?: Omit<User, "password_hash">
 }
 
-const EditUserInformation = ({ user }: Props) => {
+const EditUserInformation = ({ user }: Props ) => {
   const { state, toggle, close } = useToggleState()
 
   const name = useMemo(() => {

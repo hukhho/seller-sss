@@ -8,6 +8,7 @@ import DepositUserMoney from "./deposit-user-money"
 import BodyCard from "../../../components/organisms/body-card"
 import TableViewHeader from "../../../components/organisms/custom-table-header"
 import DepositTable from "./deposit-user-money/deposit-table"
+import WithdrawUserMoney from "./withdraw-user-money"
 
 const PersonalInformation = () => {
   const { isFeatureEnabled } = useFeatureFlag()
@@ -35,6 +36,7 @@ const PersonalInformation = () => {
               <div>
                 {" "}
                 <DepositUserMoney user={user} />
+                <WithdrawUserMoney user={user} />
               </div>
             </div>
             <EditUserInformation user={user} />

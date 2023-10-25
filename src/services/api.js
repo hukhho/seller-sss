@@ -689,11 +689,22 @@ export default {
     //   const path = `/store/custom/register`
     //   return medusaRequest("POST", path, data)
     // },
+    update(id) {
+      const path = `/admin/custom/banked/${id}`
+      return medusaRequest("PUT", path)
+    },
     deposit(data) {
       const path = `/admin/custom/deposit`
       return medusaRequest("POST", path, data)
     },
-   
+    withdraw(data) {
+      const path = `/admin/custom/withdraw`
+      return medusaRequest("POST", path, data)
+    },
+    list() {
+      const path = `/admin/custom/deposits`
+      return medusaRequest("GET", path)
+    },
   },
   invites: {
     regis(data) {

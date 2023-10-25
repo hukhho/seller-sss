@@ -21,6 +21,9 @@ type DepositRequest = {
   txn: string | null
   note: string | null
   typeTrans: string | null
+  revicedBankName: string | null
+  revicedBankNumber: string | null
+  revicedName: string | null
 }
 
 const DepositUserMoneyModal = ({ open, onClose }: Props) => {
@@ -42,13 +45,7 @@ const DepositUserMoneyModal = ({ open, onClose }: Props) => {
   const notification = useNotification()
   const [errorMessage, setErrorMessage] = useState()
   const [isSubmitting, setIsSubmitting] = useState(false)
-  function createQrCode(deposit) {
-    console.log("createQrCode", "createQrCode")
-    const amount = deposit.fiat_amount
-    const txn = deposit.txn
-    var link = `https://img.vietqr.io/image/MB-3889999999996-compact2.jpg?amount=${amount}&addInfo=${txn}&accountName=Bui%20Xuan%20Hung`
-    window.open(link, "_blank")
-  }
+
   const onSubmit = handleSubmit((data) => {
     setIsSubmitting(true)
     api.deposits
@@ -56,10 +53,7 @@ const DepositUserMoneyModal = ({ open, onClose }: Props) => {
     .then((res) => {
       console.log("res.data", res.data)
       if (res.status === 200 && !res.data?.error) {
-        notification("Success", "Successfully deposit", "success")
-        
-        createQrCode(res.data.result)
-        
+        notification("Success", "Successfully withdraw", "success")
         window.location.reload();
 
       } else {
@@ -82,6 +76,7 @@ const DepositUserMoneyModal = ({ open, onClose }: Props) => {
       setIsSubmitting(false)
       onClose()
       refetch()
+      
     })
   })
   return (
@@ -102,18 +97,30 @@ const DepositUserMoneyModal = ({ open, onClose }: Props) => {
               <div className="hidden">
               <InputField
                 {...register("typeTrans")}
-                value="DEPOSIT"
+                value="WITHDRAW"
                 type="hidden"
               />
               </div>
-            
-
+              <InputField
+                {...register("revicedBankName")}
+                errors={errors}
+                label="Tên ngân hàng nhận tiền"
+              />
+               <InputField
+                {...register("revicedBankNumber")}
+                errors={errors}
+                label="Số tài khoản"
+              />
+               <InputField
+                {...register("revicedName")}
+                errors={errors}
+                label="Tên người nhận"
+              />
               <InputField
                 {...register("note")}
                 errors={errors}
                 label="Ghi chú"
               />
-             
             </div>
           </div>
         </Modal.Content>
