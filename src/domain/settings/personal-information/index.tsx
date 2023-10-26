@@ -17,6 +17,10 @@ const PersonalInformation = () => {
   console.log("user", user)
   const actionables = [
   ]
+
+  const handlerClose = ()  => {
+    console.log("close")
+  }
   return (
     <div>
       <BackButton

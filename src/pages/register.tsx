@@ -198,11 +198,10 @@ const InvitePage = () => {
             <MedusaVice className="mb-3xlarge" />
             <div className="flex max-w-3xl flex-col items-center text-center">
               <h1 className="inter-3xlarge-semibold mb-base text-grey-0">
-                You have been invited to join the team
+                Cổng bán giày tốc độ, uy tín, dễ sử dụng
               </h1>
               <p className="inter-xlarge-regular text-grey-50">
-                You can now join the Medusa Store team. Sign up below and get
-                started with your Medusa Admin account right away.
+                Chỉ vài bước để có thể bán ngay giày của bạn
               </p>
             </div>
             <div className="mt-4xlarge">
@@ -212,7 +211,7 @@ const InvitePage = () => {
                 className="w-[280px]"
                 onClick={() => setSignUp(true)}
               >
-                Sign up
+                Đăng ký tại đây
                 <LongArrowRightIcon size={20} className="pt-1" />
               </Button>
             </div>

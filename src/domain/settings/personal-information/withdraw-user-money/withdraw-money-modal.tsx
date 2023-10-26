@@ -49,7 +49,7 @@ const DepositUserMoneyModal = ({ open, onClose }: Props) => {
   const onSubmit = handleSubmit((data) => {
     setIsSubmitting(true)
     api.deposits
-    .deposit(data)
+    .withdraw(data)
     .then((res) => {
       console.log("res.data", res.data)
       if (res.status === 200 && !res.data?.error) {
@@ -76,7 +76,7 @@ const DepositUserMoneyModal = ({ open, onClose }: Props) => {
       setIsSubmitting(false)
       onClose()
       refetch()
-      
+
     })
   })
   return (
@@ -136,7 +136,7 @@ const DepositUserMoneyModal = ({ open, onClose }: Props) => {
               disabled={isSubmitting}
               onClick={onSubmit}
             >
-              Nạp
+              Rút
             </Button>
           </div>
         </Modal.Footer>
