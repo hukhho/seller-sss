@@ -93,7 +93,8 @@ const InvitePage = () => {
         }
       })
       .catch((error) => {
-        setErrorMessage(error.message)
+        setErrorMessage(error?.response.data.error.message)
+
         notification(
           "Error",
           "An error occurred while making the request",
